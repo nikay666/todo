@@ -1,0 +1,10 @@
+#app{
+    background-color: $dark-clr;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    align-items: center;
+    padding-top: 15%;
+}

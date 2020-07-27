@@ -1,3 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap');
+@import  './mixins.scss';
+@import './variables.scss';
+@import './components/container.scss';
+@import './components/todo.scss';
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    @include font-family;
+}
 body{
-    background-color: rgb(199, 91, 91);
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+h1{
+    color: $white-clr;
+    margin: 2rem;
+    letter-spacing: 2px;
+    font-weight: 100;
 }

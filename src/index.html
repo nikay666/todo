@@ -6,6 +6,44 @@
     <title>todo</title>
 </head>
 <body>
-    <script src=""></script>
+<div id="app">
+    <h1>todo</h1>
+    <section class="todo" data-todo="">
+        <header class="todo__header">
+            <input type="checkbox" name="title-checkbox" id="title-checkbox" class="todo-checkbox">
+            <label for="title-checkbox" class="todo-label"></label>
+            <input type="text" class="todo-new" placeholder="What needs to be done?">
+        </header>
+        <section class="todo__main">
+            <ul class="todo-list">
+                <li class="todo-item">
+                    <input type="checkbox" name="checkbox-1" id="checkbox-1" class="todo-checkbox">
+                    <label for="checkbox-1" class="todo-label"></label>
+                    <p class="todo-text" contenteditable="true">bread</p>
+                    <button class="btn-delete"></button>
+                </li>
+                <li class="todo-item">
+                    <input type="checkbox" name="checkbox-2" id="checkbox-2" class="todo-checkbox">
+                    <label for="checkbox-2" class="todo-label"></label>
+                    <p class="todo-text checked" contenteditable="true">Milk</p>
+                    <button class="btn-delete"></button>
+                </li>
+                <li class="todo-item">
+                    <input type="checkbox" name="checkbox-3" id="checkbox-3" class="todo-checkbox">
+                    <label for="checkbox-3" class="todo-label"></label>
+                    <p class="todo-text" contenteditable="true">Meat</p>
+                    <button class="btn-delete"></button>
+                </li>
+            </ul>
+        </section>
+        <footer class="todo__footer">
+            <button type="button" class="btn-clear">Clear all</button>
+            <p class="date-change">
+                Changed: 
+                <span data-date="20 July 2020">20 July 2020</span>
+            </p>
+        </footer>
+    </section>
+</div>
 </body>
 </html>
