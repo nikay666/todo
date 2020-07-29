@@ -1,5 +1,4 @@
 import {createTitle, defaultTemplate} from './CreateApp.template';
-
 export default class CreateApp {
     constructor(selector, title){
         this.selector =  selector;
@@ -12,20 +11,17 @@ export default class CreateApp {
 
     }
 
-    getTemplate(){
-        const wrap = defaultTemplate(this.appID);
-        this.app.insertAdjacentHTML("beforeend",  wrap);
-
+    getDefaultTemplate(){
+        defaultTemplate(this.appID, this.app);
     }
 
     createTitle(){
         createTitle(this.app ,this.title);
     } 
 
-
     init(){
      console.log(this.appID);
      this.createTitle();
-     this.getTemplate();
+     this.getDefaultTemplate();
     }
 }

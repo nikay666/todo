@@ -1,18 +1,9 @@
+import { Field } from "./Field";
+
 export function createTitle(app, title){
     const nodeTitle = document.createElement('h1');
     nodeTitle.innerHTML = title;
     app.append(nodeTitle);
-}
-
-export  function createHeader(){
-    const header = `
-    <header class="todo__header">
-        <input type="checkbox" name="title-checkbox" id="title-checkbox" class="todo-checkbox">
-        <label for="title-checkbox" class="todo-label"></label>
-        <input type="text" class="todo-new" placeholder="What needs to be done?">
-    </header>
-    `;
-    return header;
 }
 
 export  function  createFooter(date){
@@ -49,10 +40,7 @@ export  function createWrapApp(id, date){
     `;
 }
 
-export function defaultTemplate(id){
-    return `
-        <section class="todo" data-todo="${id}">
-        ${createHeader()}
-        </section>
-    `;
+export function defaultTemplate(id, app){
+   new Field(app, id).render();
+
 }
