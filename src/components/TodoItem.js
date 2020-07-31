@@ -35,19 +35,20 @@ export class TodoItem{
         return this.itemID;
     }
 
+    allCheck(parentValue){
+        if(parentValue === false){
+            setFalseCheck(this.checkBtn, this.textNode, this.classChecked);
+
+        }else if(parentValue === true){ 
+            setTrueCheck(this.checkBtn, this.textNode, this.classChecked);
+        }
+    }
+
     check(){
         if(this.checkBtn.dataset.check === 'false'){
-            this.checkBtn.checked = true; 
-            this.checkBtn.dataset.check = 'true';
-            this.textNode.classList.add( this.classChecked);
-            this.textNode.setAttribute('contenteditable', 'false');
-
-
+            setTrueCheck(this.checkBtn, this.textNode, this.classChecked);
         }else{
-            this.checkBtn.checked = false;
-            this.checkBtn.dataset.check = 'false';
-            this.textNode.classList.remove( this.classChecked);
-            this.textNode.setAttribute('contenteditable', 'true');
+            setFalseCheck(this.checkBtn, this.textNode, this.classChecked);
         }
     }
 
@@ -56,8 +57,7 @@ export class TodoItem{
 
         this.checkBtn.addEventListener('click', () => {
             this.check();
-            //TODO Сделать чтобы работало не  криво
-        })
+        });
         
     }
 
@@ -70,13 +70,24 @@ export class TodoItem{
         });
     }
 
-
-
     render(){
         this.getTemplate();
         this.addInputEvent();
         this.addCheckEvent();
     }
+}
+
+function setTrueCheck(checkBtn, textNode, classChecked){
+    checkBtn.checked = true; 
+    checkBtn.dataset.check = 'true';
+    textNode.classList.add( classChecked);
+    textNode.setAttribute('contenteditable', 'false');
+}
+function setFalseCheck(checkBtn, textNode, classChecked){
+    checkBtn.checked = false;
+    checkBtn.dataset.check = 'false';
+    textNode.classList.remove( classChecked);
+    textNode.setAttribute('contenteditable', 'true');
 }
 
 

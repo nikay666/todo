@@ -7,7 +7,6 @@ import { Footer } from "./Footer";
 export class Field {
     constructor(app, appID, state){
         this.app = app;
-        
         this.childrens = [];
         this.appID = appID;
 
@@ -53,7 +52,6 @@ export class Field {
                     }
 
                     this.footer.updateDate();
-                    console.log(this.childrens)
                     this.footer.updateItems(this.childrens);
 
 
@@ -81,8 +79,7 @@ export class Field {
     addCheckboxEvent(){
         this.check.addEventListener('click', () => {
             this.childrens.forEach(child => {
-                child.check();
-                 //TODO Сделать чтобы работало не  криво
+                child.allCheck(this.check.checked);
             }); 
         });
 
@@ -91,7 +88,6 @@ export class Field {
     listenerChildrens(){
         this.todo.addEventListener('click', (e) => {
             if(e.target.classList.contains('btn-delete')){
-                // this.childrens = this.footer.getCountItems();
 
                 this.childrens = this.childrens.filter((child,  i)=>{
                     if(child.getItemID() !== e.target.parentNode.id){
