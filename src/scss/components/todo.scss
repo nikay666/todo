@@ -113,6 +113,7 @@
     }
 
     &-text{
+        @include transition;
         width:  calc(100% - 40px);
         font-size: $fs-item;
         padding: $pd-cont;

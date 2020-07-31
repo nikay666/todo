@@ -1,2 +1,6 @@
 import './scss/index.scss';
-console.log('hello');
+
+import CreateApp from './components/CreateApp';
+
+const app = new CreateApp('#app', 'todo');
+app.init();
