@@ -6,13 +6,13 @@ export function createTitle(app, title){
     app.append(nodeTitle);
 }
 
-export  function  createFooter(date){
+export  function  createFooter(date, id, btnID, footerID){
     const footer =  `
-    <footer class="todo__footer">
-        <button type="button" class="btn-clear">Clear all</button>
+    <footer class="todo__footer" id="${footerID}">
+        <button id="${btnID}" type="button" class="btn-clear">Clear all</button>
         <p class="date-change">
             Changed: 
-            <span data-date="${date}">${date}</span>
+            <span id="${id}" data-date="${date}">${date}</span>
         </p>
     </footer>
     `;
@@ -40,7 +40,7 @@ export  function createWrapApp(id, date){
     `;
 }
 
-export function defaultTemplate(id, app){
-   new Field(app, id).render();
+export function defaultTemplate(id, app, state){
+   new Field(app, id, state).render();
 
 }
