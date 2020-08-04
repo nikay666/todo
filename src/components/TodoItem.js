@@ -1,13 +1,14 @@
 import { toHTML, deleteElementById, getId, getNode } from "./utilit";
 
 export class TodoItem{
-    constructor(text, node){
+    constructor(text, node, state){
         this.text = text;
         this.node = node;
         this.value = '';
         this.id =  getId('checkbox-');
         this.itemID =  getId('item-');
         this.classChecked = 'checked';
+        this.state = state;
     }
 
     getTemplate(){
@@ -15,6 +16,7 @@ export class TodoItem{
         toHTML(this.value, this.node);
         this.textNode = getNode(this.itemID, '.todo-text');
         this.btnNode = getNode(this.itemID, '.btn-delete');
+
     }
 
     toDefalutCheck(){
@@ -68,6 +70,10 @@ export class TodoItem{
             }
             console.log(this.textNode.innerHTML);
         });
+    }
+
+    returnItemId(){
+        return this.itemID;
     }
 
     render(){

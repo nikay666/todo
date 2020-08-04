@@ -2,6 +2,7 @@ import { createMainSection } from "./CreateApp.template";
 import { toHTML } from "./utilit";
 import { TodoItem } from "./TodoItem";
 import { Footer } from "./Footer";
+import { LocalStorage, storage } from "./LocalStorage";
 
 
 export class Field {
@@ -11,6 +12,7 @@ export class Field {
         this.appID = appID;
 
         this.state = state;
+
     }
 
     getTemplate(){
@@ -39,9 +41,12 @@ export class Field {
                 if(target.value !== ''){
                     this.checkMainSection();
 
-                    const item = new TodoItem(target.value, this.wrapNode);
+                    const item = new TodoItem(target.value, this.wrapNode, this.state);
                     item.render();
                     this.childrens.push(item);
+                    this.state.addItem(item.returnItemId(), target.value);
+                    storage(this.appID, this.state)
+
                     target.value = '';
                     this.checkChildrens();
                     this.toCheckboxDefault();
