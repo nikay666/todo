@@ -106,6 +106,7 @@ export class Field {
                 
                 if(this.childrens.length <=  0){
                     this.footer.destroy();
+                    this.storage.clearAll();
                     delete this.footer;
                 }else{
                     this.footer.updateDate();
@@ -115,6 +116,7 @@ export class Field {
             }
             if(e.target.classList.contains('btn-clear')){
                 this.footer.clearAll();
+                this.storage.clearAll();
                 delete this.footer;
                 this.childrens = [];
             }

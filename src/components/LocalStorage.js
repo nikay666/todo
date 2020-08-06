@@ -1,3 +1,5 @@
+import { toObject } from "./utilit";
+
 export class Storage{
     constructor(){
         this.keyApp = 'todo-app';
@@ -6,29 +8,19 @@ export class Storage{
 
     addItem(key, value){
         this.prevState = this.storage() || {};
-        
-        console.log(this.prevState)
-        const notes =  this.toObject(key,  value);
+        const notes =  toObject(key,  value);
 
         if(Object.keys(this.prevState).length === 0){
-            console.log('NO')
             this.storage(notes);
         } else{
 
             Object.keys(this.prevState).forEach(key =>  {
 
-                console.log('prev',this.prevState[key]);
-                console.log('value', notes);
-                
                 if(!isEqual(this.prevState[key], notes[key])){
-                    console.log('NO EQUAL')
-                    const obj = this.toObject(notes.id, notes.value )
-                    console.log(obj);
-                    console.log( this.prevState);
-                    const res = this.prevState.push(obj);
-                    // res[notes.id] = notes.value;
+                    const res = this.prevState;
+                    const id  =  Object.keys(notes);
 
-                    // const arr = [{...this.prevState}, item]
+                    res[id] = notes[id];
                     this.storage(res);
                 }
             });
@@ -44,43 +36,20 @@ export class Storage{
         localStorage.setItem(this.keyApp, JSON.stringify(data));
     }
 
-
     getkeyApp(){
         return this.keyApp;
     }
 
-    toObject(id, value){
-        const res = {
-            id:id,
-            value: value
-        };
-        return res;
-    }
 
-    setLocalStorage(id, value){
-        let res = toObject(id, value);
-
-        res = JSON.stringify(res);
-
-        localStorage.setItem(this.keyApp, res);
-    }
-    getLocalStorage(){
-        localStorage.getItem(this.key)
-    }
     clearAll(){
-        localStorage.clear();
+        localStorage.removeItem(this.keyApp);
     }
+
     removeTodo(){
         localStorage.removeItem(this.key);
     }
 
 }
-// export function storage(key, data = null){
-//     if(!data){
-//         return  JSON.parse(localStorage.getItem(key));
-//     }
-//     localStorage.setItem(key, JSON.stringify(data));
-// }
 
 export function isEqual(a, b){
     if(typeof a === 'object' && typeof b === 'object'){

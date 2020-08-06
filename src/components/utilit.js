@@ -16,3 +16,10 @@ export function getNode(wrapID, selector){
     const node = wrap.querySelector(selector);
     return node;
 }
+
+export function  toObject(id, value){
+    const res = {
+        [id]:value
+    };
+    return res;
+}
