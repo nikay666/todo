@@ -1,14 +1,13 @@
 import { toHTML, deleteElementById, getId, getNode } from "./utilit";
 
 export class TodoItem{
-    constructor(text, node, state){
+    constructor(text, node){
         this.text = text;
         this.node = node;
         this.value = '';
         this.id =  getId('checkbox-');
         this.itemID =  getId('item-');
         this.classChecked = 'checked';
-        this.state = state;
     }
 
     getTemplate(){

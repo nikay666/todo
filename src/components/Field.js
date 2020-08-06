@@ -6,12 +6,12 @@ import { LocalStorage, storage } from "./LocalStorage";
 
 
 export class Field {
-    constructor(app, appID, state){
+    constructor(app, appID, storage){
         this.app = app;
         this.childrens = [];
         this.appID = appID;
+        this.storage = storage;  
 
-        this.state = state;
 
     }
 
@@ -41,11 +41,11 @@ export class Field {
                 if(target.value !== ''){
                     this.checkMainSection();
 
-                    const item = new TodoItem(target.value, this.wrapNode, this.state);
+                    const item = new TodoItem(target.value, this.wrapNode);
                     item.render();
                     this.childrens.push(item);
-                    this.state.addItem(item.returnItemId(), target.value);
-                    storage(this.appID, this.state)
+
+                    this.storage.addItem(item.getItemID(), target.value)
 
                     target.value = '';
                     this.checkChildrens();

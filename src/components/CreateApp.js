@@ -1,6 +1,6 @@
 import {createTitle, defaultTemplate} from './CreateApp.template';
 import { getId } from './utilit';
-import {  State } from './LocalStorage';
+import {  Storage } from './LocalStorage';
 export default class CreateApp {
     constructor(selector, title){
         this.selector =  selector;
@@ -14,7 +14,7 @@ export default class CreateApp {
     }
 
     getDefaultTemplate(){
-        defaultTemplate(this.appID, this.app, this.state);
+        defaultTemplate(this.appID, this.app, this.storage);
     }
 
     createTitle(){
@@ -23,7 +23,7 @@ export default class CreateApp {
 
     init(){
      console.log(this.appID);
-     this.state = new State(this.appID);
+     this.storage = new Storage();
      this.createTitle();
      this.getDefaultTemplate();
     }

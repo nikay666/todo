@@ -40,7 +40,7 @@ export  function createWrapApp(id, date){
     `;
 }
 
-export function defaultTemplate(id, app, state){
-   new Field(app, id, state).render();
+export function defaultTemplate(id, app, storage){
+   new Field(app, id, storage).render();
 
 }

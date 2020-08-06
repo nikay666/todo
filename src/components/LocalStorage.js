@@ -1,32 +1,66 @@
-export class State{
-    constructor(keyApp){
-        this.keyApp = keyApp;
+export class Storage{
+    constructor(){
+        this.keyApp = 'todo-app';
         this.prevState = {};
     }
-    addItem(id, value){
-        this.prevState = localStorage.getItem(this.keyApp);
+
+    addItem(key, value){
+        this.prevState = this.storage() || {};
+        
         console.log(this.prevState)
-        console.log(value);
-   
-        // Object.keys(value).forEach(key =>  {
-        //     if(!isEqual(this.prevState[key], value[key])){
-        //         console.log(value[key])
-        //     }
-        // })
-        // this.state.id = value;
+        const notes =  this.toObject(key,  value);
+
+        if(Object.keys(this.prevState).length === 0){
+            console.log('NO')
+            this.storage(notes);
+        } else{
+
+            Object.keys(this.prevState).forEach(key =>  {
+
+                console.log('prev',this.prevState[key]);
+                console.log('value', notes);
+                
+                if(!isEqual(this.prevState[key], notes[key])){
+                    console.log('NO EQUAL')
+                    const obj = this.toObject(notes.id, notes.value )
+                    console.log(obj);
+                    console.log( this.prevState);
+                    const res = this.prevState.push(obj);
+                    // res[notes.id] = notes.value;
+
+                    // const arr = [{...this.prevState}, item]
+                    this.storage(res);
+                }
+            });
+
+        }
+    
     }
+
+    storage(data = null){
+        if(!data){
+            return  JSON.parse(localStorage.getItem(this.keyApp));
+        }
+        localStorage.setItem(this.keyApp, JSON.stringify(data));
+    }
+
 
     getkeyApp(){
         return this.keyApp;
     }
-    setLocalStorage(id, value){
-        let res = {
-            id: id,
+
+    toObject(id, value){
+        const res = {
+            id:id,
             value: value
         };
-        res = JSON.stringify(res);
+        return res;
+    }
 
-        console.log(res);
+    setLocalStorage(id, value){
+        let res = toObject(id, value);
+
+        res = JSON.stringify(res);
 
         localStorage.setItem(this.keyApp, res);
     }
@@ -41,12 +75,12 @@ export class State{
     }
 
 }
-export function storage(key, data = null){
-    if(!data){
-        return  JSON.parse(localStorage.getItem(key));
-    }
-    localStorage.setItem(key, JSON.stringify(data));
-}
+// export function storage(key, data = null){
+//     if(!data){
+//         return  JSON.parse(localStorage.getItem(key));
+//     }
+//     localStorage.setItem(key, JSON.stringify(data));
+// }
 
 export function isEqual(a, b){
     if(typeof a === 'object' && typeof b === 'object'){
