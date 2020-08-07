@@ -98,6 +98,7 @@ export class Field {
                     if(child.getItemID() !== e.target.parentNode.id){
                         return true;
                     }else{
+                        this.storage.removeItem(child.itemID);
                         child.deleteItem();
                         return  false;
                     }

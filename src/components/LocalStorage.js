@@ -26,7 +26,17 @@ export class Storage{
             });
 
         }
-    
+    }
+
+    removeItem(id){
+        let store = this.storage();
+
+        Object.keys(store).forEach(key =>  {
+            if(key ===  id){
+                 delete store[key];
+                 this.storage(store);
+            }
+        });
     }
 
     storage(data = null){
@@ -39,7 +49,6 @@ export class Storage{
     getkeyApp(){
         return this.keyApp;
     }
-
 
     clearAll(){
         localStorage.removeItem(this.keyApp);

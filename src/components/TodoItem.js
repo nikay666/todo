@@ -24,9 +24,9 @@ export class TodoItem{
         this.checkBtn.dataset.check = 'false';
     }
 
-    deleteElement(){
-        deleteElementById(this.itemID);
-    }
+    // deleteElement(){
+    //     deleteElementById(this.itemID);
+    // }
     
     deleteItem(){
         deleteElementById(this.itemID);
