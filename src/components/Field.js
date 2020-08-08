@@ -41,7 +41,7 @@ export class Field {
                 if(target.value !== ''){
                     this.checkMainSection();
 
-                    const item = new TodoItem(target.value, this.wrapNode);
+                    const item = new TodoItem(target.value, this.wrapNode, this.storage);
                     item.render();
                     this.childrens.push(item);
 
@@ -76,7 +76,6 @@ export class Field {
     toCheckboxDefault(){
         this.childrens.forEach(child => {
             child.toDefalutCheck();
-            // this.storage.change
         }); 
         this.check.checked = false;
     }
@@ -86,6 +85,8 @@ export class Field {
         this.check.addEventListener('click', () => {
             this.childrens.forEach(child => {
                 child.allCheck(this.check.checked);
+
+                this.storage.updateCheck(child.checkBtn, child.itemID);
             }); 
         });
 

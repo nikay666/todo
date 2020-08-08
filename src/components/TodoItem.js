@@ -1,13 +1,14 @@
 import { toHTML, deleteElementById, getId, getNode } from "./utilit";
 
 export class TodoItem{
-    constructor(text, node){
+    constructor(text, node, storage){
         this.text = text;
         this.node = node;
         this.value = '';
         this.id =  getId('checkbox-');
         this.itemID =  getId('item-');
         this.classChecked = 'checked';
+        this.storage = storage;
     }
 
     getTemplate(){
@@ -48,6 +49,7 @@ export class TodoItem{
     check(){
         if(this.checkBtn.dataset.check === 'false'){
             setTrueCheck(this.checkBtn, this.textNode, this.classChecked);
+
         }else{
             setFalseCheck(this.checkBtn, this.textNode, this.classChecked);
         }
@@ -58,6 +60,7 @@ export class TodoItem{
 
         this.checkBtn.addEventListener('click', () => {
             this.check();
+            this.storage.updateCheck(this.checkBtn,this.itemID);//
         });
         
     }

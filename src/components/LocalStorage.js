@@ -9,9 +9,7 @@ export class Storage{
 
     addItem(key, value, isCheck){
         this.prevState = this.storage() || {};
-
         const notes =  toObject(key,  value, isCheck);
-
         const resArr = Array.from(this.prevState);
 
         if(resArr.length  === 0){
@@ -35,6 +33,19 @@ export class Storage{
         });
     }
 
+    updateCheck(input, inputID){
+        let store = Array.from(this.storage());
+
+        store.forEach(item =>  {
+            if(item.id === inputID){
+                console.log(input.checked);
+                item.isCheck = input.checked;
+            }
+            this.storage(store);
+        });
+
+    }
+
     storage(data = null){
         if(!data){
             return  JSON.parse(localStorage.getItem(this.keyApp));
@@ -48,10 +59,6 @@ export class Storage{
 
     clearAll(){
         localStorage.removeItem(this.keyApp);
-    }
-
-    removeTodo(){
-        localStorage.removeItem(this.key);
     }
 
     init(){
