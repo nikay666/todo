@@ -17,9 +17,12 @@ export function getNode(wrapID, selector){
     return node;
 }
 
-export function  toObject(id, value){
+export function  toObject(id, value, isCheck){
     const res = {
-        [id]:value
+        id: id,
+        value: value,
+        isCheck: isCheck
+
     };
     return res;
 }

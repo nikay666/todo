@@ -18,7 +18,7 @@ export class Footer {
 
     clearAll(){
         this.items.forEach(item => {
-            item.deleteElement();
+            item.deleteItem();
         });
         this.destroy();
     }

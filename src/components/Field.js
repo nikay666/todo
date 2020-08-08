@@ -45,7 +45,7 @@ export class Field {
                     item.render();
                     this.childrens.push(item);
 
-                    this.storage.addItem(item.getItemID(), target.value)
+                    this.storage.addItem(item.getItemID(), target.value, item.checkBtn.checked);
 
                     target.value = '';
                     this.checkChildrens();
@@ -76,6 +76,7 @@ export class Field {
     toCheckboxDefault(){
         this.childrens.forEach(child => {
             child.toDefalutCheck();
+            // this.storage.change
         }); 
         this.check.checked = false;
     }

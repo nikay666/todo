@@ -4,37 +4,33 @@ export class Storage{
     constructor(){
         this.keyApp = 'todo-app';
         this.prevState = {};
+        this.initialState = this.storage() || {};
     }
 
-    addItem(key, value){
+    addItem(key, value, isCheck){
         this.prevState = this.storage() || {};
-        const notes =  toObject(key,  value);
 
-        if(Object.keys(this.prevState).length === 0){
-            this.storage(notes);
-        } else{
+        const notes =  toObject(key,  value, isCheck);
 
-            Object.keys(this.prevState).forEach(key =>  {
+        const resArr = Array.from(this.prevState);
 
-                if(!isEqual(this.prevState[key], notes[key])){
-                    const res = this.prevState;
-                    const id  =  Object.keys(notes);
-
-                    res[id] = notes[id];
-                    this.storage(res);
-                }
-            });
-
+        if(resArr.length  === 0){
+            resArr.push(notes)
+            this.storage(resArr);
+        } else {
+            if(resArr.every(item => item.id !== notes.id)){
+                resArr.push(notes);
+                this.storage(resArr);
+            }
         }
     }
 
     removeItem(id){
-        let store = this.storage();
-
-        Object.keys(store).forEach(key =>  {
-            if(key ===  id){
-                 delete store[key];
-                 this.storage(store);
+        let store = Array.from(this.storage());
+        store.forEach((item, i) =>  {
+            if(item.id === id){
+                store.splice(i, i);
+                this.storage(store);
             }
         });
     }
@@ -57,6 +53,14 @@ export class Storage{
     removeTodo(){
         localStorage.removeItem(this.key);
     }
+
+    init(){
+        if(this.initialState !== {}){
+            console.log(this.initialState);
+        }
+
+    }
+
 
 }
 
