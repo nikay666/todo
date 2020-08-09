@@ -1,15 +1,16 @@
 import { toHTML, deleteElementById, getId, getNode } from "./utilit";
 
 export class TodoItem{
-    constructor(text, node, storage){
+    constructor(text, node, storage, id){
         this.text = text;
         this.node = node;
         this.value = '';
         this.id =  getId('checkbox-');
-        this.itemID =  getId('item-');
+        this.itemID =  id || getId('item-') ;
         this.classChecked = 'checked';
         this.storage = storage;
     }
+
 
     getTemplate(){
         this.value  = getTemplateItem(this.text, this.id, this.itemID);
@@ -25,10 +26,6 @@ export class TodoItem{
         this.checkBtn.dataset.check = 'false';
     }
 
-    // deleteElement(){
-    //     deleteElementById(this.itemID);
-    // }
-    
     deleteItem(){
         deleteElementById(this.itemID);
     }
@@ -38,6 +35,8 @@ export class TodoItem{
     }
 
     allCheck(parentValue){
+        // console.log('allCheck',parentValue)
+
         if(parentValue === false){
             setFalseCheck(this.checkBtn, this.textNode, this.classChecked);
 

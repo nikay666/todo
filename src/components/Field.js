@@ -12,29 +12,44 @@ export class Field {
         this.appID = appID;
         this.storage = storage;  
 
-
     }
 
     getTemplate(){
         createStartInput(this.app, this.appID);
         this.todo = document.querySelector('.todo');
         this.check = document.querySelector('.todo-checkbox');
+        this.filed = document.querySelector('.todo-new');
+    
+        this.checkMainSection();
+        this.childrens = this.storage.init(this.wrapNode, this.storage);
+        this.checkChildrens();
+        console.log(this.childrens)
+        if(this.childrens.every((el) => el.checkBtn.checked === true) && this.childrens.length > 0){
+            this.check.checked  = true;
+        }
+
+        this.addFooter();
     }
 
     checkMainSection(){
         if(this.wrapNode){
           return;
         }
+        console.log(this.todo);
         toHTML(createMainSection(), this.todo);
         this.wrapNode = document.querySelector('.todo-list');
-        this.footer = new Footer(this.childrens, this.todo);
-        this.footer.render();
+        this.addFooter();
+    }
+    
+    addFooter(){
+        if(this.childrens.length > 0){
+            this.footer = new Footer(this.childrens, this.todo);
+            this.footer.render();
+        }
     }
 
     addEnterEvent(){
-        const filed = document.querySelector('.todo-new');
-        
-        filed.addEventListener('keydown', (e) =>{
+        this.filed.addEventListener('keydown', (e) =>{
             const target = e.target;
 
             if(e.key === 'Enter'){
@@ -83,6 +98,7 @@ export class Field {
 
     addCheckboxEvent(){
         this.check.addEventListener('click', () => {
+
             this.childrens.forEach(child => {
                 child.allCheck(this.check.checked);
 
@@ -107,7 +123,7 @@ export class Field {
                    
                 });
                 
-                if(this.childrens.length <=  0){
+                if(this.childrens.length <= 0){
                     this.footer.destroy();
                     this.storage.clearAll();
                     delete this.footer;

@@ -1,4 +1,5 @@
 import { toObject } from "./utilit";
+import { TodoItem } from "./TodoItem";
 
 export class Storage{
     constructor(){
@@ -38,7 +39,6 @@ export class Storage{
 
         store.forEach(item =>  {
             if(item.id === inputID){
-                console.log(input.checked);
                 item.isCheck = input.checked;
             }
             this.storage(store);
@@ -61,14 +61,24 @@ export class Storage{
         localStorage.removeItem(this.keyApp);
     }
 
-    init(){
-        if(this.initialState !== {}){
-            console.log(this.initialState);
+    init(wrap,  stor){
+        const prevStore =  Array.from(this.storage()  || {});
+
+        if(prevStore.length === 0){
+            return [];
         }
 
+        let arr = []; 
+        prevStore.forEach(item => {
+            const child = new TodoItem(item.value, wrap, stor, item.id);
+
+            child.render();
+            child.allCheck(item.isCheck);
+   
+            arr.push(child);
+        });
+        return arr;
     }
-
-
 }
 
 export function isEqual(a, b){

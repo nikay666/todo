@@ -24,7 +24,6 @@ export default class CreateApp {
     init(){
      console.log(this.appID);
      this.storage = new Storage();
-     this.storage.init();
      this.createTitle();
      this.getDefaultTemplate();
     }
