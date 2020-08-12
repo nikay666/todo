@@ -28,6 +28,7 @@ export class Storage{
         let store = Array.from(this.storage());
         store.forEach((item, i) =>  {
             if(item.id === id){
+                if(i === 0 ) store.shift();
                 store.splice(i, i);
                 this.storage(store);
             }

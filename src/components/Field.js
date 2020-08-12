@@ -113,6 +113,7 @@ export class Field {
             if(e.target.classList.contains('btn-delete')){
 
                 this.childrens = this.childrens.filter((child,  i)=>{
+
                     if(child.getItemID() !== e.target.parentNode.id){
                         return true;
                     }else{
