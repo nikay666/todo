@@ -1,2 +1,2 @@
 # todo
-todo list on vanilla JS
+todo list on JS
